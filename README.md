@@ -55,7 +55,7 @@
        - Resolvers: Definir como sera feita cada ação dentro do banco de dados
        - Model: Definir campos usados no banco de dados 
  
-## Configurando servidor
+## Configurando servidor/conecção com banco de dados
 
 Na pasta API_GraphQL, crie uma pasta <b>src </b>
 
@@ -87,6 +87,32 @@ Caminho:<b>API_GraphQL/src/server.js</b>
       }).catch(err=>{
           console.log('falga ao conectar o servidor',err)
       })
+     
+
+Na conecção do servidor temos chamas para os arquivos resolvers e typeDefs,vamos crialos?
+
+## Criando definições de tipo (typeDefs)
+O typeDefs é uma junção de 3 itens:
+
+  <b>- Types:</b> Definir dados com base nos typos do schema
+  
+  <b>- Query:</b> Definir comando de consultas da api
+  
+  <b>- Mutation:</b> Definir comandos que mudam os dados da api
+
+Para criarmos as definições de tipo crie uma pasta <b>typeDefs</b> em <b>API_GraphQL/src</b>
+
+Caminho: <b>API_GraphQL/src/typeDefs</b>
+
+  ### Crie os seguinte arquivos:
+  
+     -typeDefs
+          -index.js
+          -mutation.js
+          -query.js
+          -types.js
+
+
     
     
 
