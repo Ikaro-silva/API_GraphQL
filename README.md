@@ -111,8 +111,28 @@ Caminho: <b>API_GraphQL/src/typeDefs</b>
           -mutation.js
           -query.js
           -types.js
+          
+         
+## Types 
+vamos começar com criando os typos (type), dentro da API GraphQl ele é responsavel por modelar
+os dados, sempre em concordancia com os schemas do model definido pelo mongoose e o mongoDB.
 
+Em <b>typeDefs/types.js</b> escreva o seguinte código:
 
+Caminho: <b>API_GraphQL/src/typeDefs/types.js</b>
+      
+    const{ gql }=require('apollo-server')
+
+    const types = gql`
+    type User {
+      id: ID
+      nome: String!
+      email: String!
+      senha: String!
+    }
+    `;
+
+    module.exports=types
     
     
 
