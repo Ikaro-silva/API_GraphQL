@@ -276,7 +276,40 @@ Caminho: <b>API_GraphQL/src/resolvers/userResolver.js</b>
 
       module.exports=useResolver
     
+Neste arquivo usamos métodos expostos pela biblioteca Mongoose onde criamos a model no passo anterior. Dessa forma associamos as queries e mutations criadas nas definições de tipos à ações no banco de dados MongoDB.
 
+## Conectando banco de dados 
+Para conectar ao banco usaremos DotEnv para armazenar as credenciais do banco. Essa biblioteca permite criar variáveis de ambiente onde podemos ter as credenciais do banco ao invés de tê-las no código o que comprometeria as informações deixando disponíveis a qualquer pessoas com acesso ao código, por exemplo, num repositório git.
+
+Em <b>API_GraphQL/.env</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/.env</b>
+    
+    URI=mongodb://localhost:27017/GraphQL
+    
+### Configurando variáveis
+Arquivo responsavel por configurar as variáveis de ambiente.
+
+Em <b>config/DBconfig.js</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/src/config/DBconfig.js</b>
+
+    const dotenv =require('dotenv')
+    dotenv.config()
+
+    // variavel de ambiente "URI" do mongodb
+    module.exports={
+        URI:process.env.URI
+    }
+
+
+# Pronto,Nossa API-GraphQL esta pronta!
+
+## Testando a API
+
+
+
+    
    
 
 
