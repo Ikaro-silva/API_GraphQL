@@ -40,7 +40,58 @@
 ## Instalando dependencias
    ### Apollo-Server,GraphQL, mongoose, dotenv
       npm install graphql apollo-server mongoose dotenv
-     
+      
+   Na pasta do projeto API_GraphQ execute o comando acima.
+   - graphql: Montar schemas e executar queries GraphQL
+   - apollo-server: Montar servidor GraphQL(tem ferramenta de suporte para teste da api)
+   - mongoose: Montar o model para o banco de dados e estabelecer conecção com o MongoDB
+   - dotenv: Montar variáveis de ambiente 
+   
+## GraphQL/Apollo-Server/MongoDB
+   Precisamos definir algumas necessidades do sevidor GraphQL, seriam o <b>typeDefs</b> e o <b>resorvers</b>,
+   além disso ainda existe o <b>model</b>
+   ### 3 Principais itens
+       - TypeDefs(Definição de tipo):Modelar dados com base nos Schemas
+       - Resolvers: Definir como sera feita cada ação dentro do banco de dados
+       - Model: Definir campos usados no banco de dados 
+ 
+## Configurando servidor
+
+Na pasta API_GraphQL, crie uma pasta <b>src </b>
+
+Em <b>API_GraphQL/src</b> crie um arquivo <b>server.js</b>
+
+Caminho:<b>API_GraphQL/src/server.js</b>
+
+    const { ApolloServer }=require("apollo-server")
+    const mongose=require('mongoose')
+    const typeDefs=require('./src/typeDefs/index')
+    const resolvers=require('./src/resolvers/index')
+    const DBconfig=require('./src/config/DBconfig')
+
+    //BANCO DE DADOS
+        mongose.set('strictQuery', false)
+        mongose.connect(DBconfig.URI)
+        .then(()=>{
+            console.log('Banco de dados conectado')
+        })
+        .catch(err=>{
+            console.log('Fala ao conectar ao banco de dados',err)
+        })
+
+    //SERVIDOR
+      const server = new ApolloServer({ typeDefs, resolvers });
+      server.listen()
+      .then(({url})=>{
+          console.log('servidor conectado na url',url)
+      }).catch(err=>{
+          console.log('falga ao conectar o servidor',err)
+      })
+    
+    
+
+   
+
 
 
 
