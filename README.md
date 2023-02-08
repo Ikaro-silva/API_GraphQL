@@ -133,7 +133,148 @@ Caminho: <b>API_GraphQL/src/typeDefs/types.js</b>
     `;
 
     module.exports=types
+
+## Query
+Agora vamos montar a query.vamos montar 2 queries : uma que retorna um array de usuários e o outro vai retornar somente um usuario 
+apartir de um id informado.
+
+Em <b>typeDefs/types.js</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/src/typeDefs/query.js</b>
+   
+    const{gql}=require ('apollo-server')
+    const query=gql`
+        type Query{
+            users:[User]!
+            user(id:ID!):User!
+        }
+    `;
+    module.exports=query
     
+Pronto as queries estão definidas. No trecho de código acima dissemos ao servidor que a query chamada useres deve retornar um array com dados do tipo User (definido no passo anterior) e a query chamada fruit deve ter um parâmetro chamado id com um dado do tipo ID (já existente em GraphQL) e retornar um item do tipo User. A exclamação (!) define o campo como obrigatório
+
+## Mutation
+Agora vamos definir a mutation, essa parte é parecida com as queries.Mutations são queries responsaveis por alteração de dados.
+
+Em <b>typeDefs/types.js</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/src/typeDefs/mutation.js</b>
+    
+    const {gql}=require('apollo-server')
+    const mutation=gql`
+    type Mutation {
+      createUser(user: CreateUserInput!): User!
+      updateUser(id: ID!, user: UpdateUserInput!): User!
+      deleteUser(id: ID!):User
+    }
+    input CreateUserInput {
+      nome: String!
+      email: String!
+      senha: String!
+    }
+    input UpdateUserInput {
+      nome: String
+      email: String
+      senha: String
+    }
+    type User {
+      id: ID!
+      nome: String!
+      email: String!
+      senha: String!
+    }
+    `;
+
+    module.exports=mutation
+
+Alem do tipo Mutation estão definidos alguns tipos input, esses inputs são para separar os parâmetros passados a mutation a fim de deixar as assinaturas mais limpas e de fácil manutenção.
+
+## Conclusão de typeDefs
+  Para concluir essa parte. Em <b>typeDefs/types.js</b> escreva o seguinte código:
+
+  Caminho: <b>API_GraphQL/src/typeDefs/query.js</b>
+  
+      const query= require('./query')
+      const mutation= require('./mutation')
+      const types = require('./types')
+
+      const typeDefs=[query,mutation,types]
+
+      module.exports=typeDefs
+
+## Criando models
+Vamos definir o model User para que possamos modelar os dados do banco de dados usando os resolvers.
+
+Em <b>model/-user.model.js</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/src/model/-user.model.js</b>
+    
+    
+        const mongoose=require('mongoose')
+        const userSchema=new mongoose.Schema({
+            nome:{
+                type:String
+            },
+            email:{
+                type:String
+            },
+            senha:{
+                type:String
+            },
+
+        })
+
+        const User=mongoose.model('User',userSchema)
+
+        module.exports=User
+    
+## Criando Resolvers
+Resolvers é aonde associamos quais ações queries e mutations devem tomar e la tambem é aonde é definido as chamadas feitas no banco de dados.Então usamos o model apara implementar essas ações no banco de dados.
+
+Em <b>resolvers/userResolver.js</b> escreva o seguinte código:
+
+Caminho: <b>API_GraphQL/src/resolvers/userResolver.js</b>
+      
+      const User= require('../model/user.model')
+      const useResolver={
+          Query:{
+              async users(){
+                  const useres =await User.find({})
+                  if(useres==null){
+                      console.log("falha na consulta")
+                      return
+                  }
+                  else{
+
+                      return useres
+                  }
+
+              },
+              async user(_, {id}){
+                  const userid=await User.findById(id)
+                  return userid
+              },
+          },
+          Mutation:{
+              createUser(_,{user}){
+                  const newUser=new User(user)
+
+                  return newUser.save()
+              },
+              async updateUser(_,{id,user}){
+
+                  const userUpda=await User.findByIdAndUpdate(id,user)
+                  return userUpda
+              },
+              async deleteUser(_, { id }) {
+
+                  const deteUser=await User.findByIdAndRemove(id);
+                  return deteUser
+               },
+          }
+      }
+
+      module.exports=useResolver
     
 
    
