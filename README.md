@@ -373,6 +373,9 @@ Caminho: <b>API_GraphQL/src/config/DBconfig.js</b>
         senha
       }
     }
+    
+## Para mais informações de como usar queries e mutations acesse:
+  ### https://graphql.org/learn/queries/
   
 ## Todos os testes foram executado na ferramenta que o apollo-server ddisponibilizar:
   ### https://studio.apollographql.com/sandbox/explorer
