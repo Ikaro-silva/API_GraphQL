@@ -307,6 +307,77 @@ Caminho: <b>API_GraphQL/src/config/DBconfig.js</b>
 
 ## Testando a API
 
+   ### Iniciando API
+       
+       node .server.js
+    
+   ### Criar usuários:
+        
+        mutation createUser{
+        createUser(user:{
+        nome:"ikaro silva",
+        email:"ikaro@gmail.com",
+        senha:"123654987"})
+        {
+          id
+          nome
+          email
+          senha
+        }
+      }
+      
+  ### Consultar todos usuários:
+        
+        query users{
+          users {
+            id
+            nome
+            email
+            senha
+          }
+        }
+        
+ ### Consultar por id:
+      
+      query userID{
+      user(id:"63e29267d39499c37d9496e2") {
+        id
+        nome
+        email
+        senha
+      }
+    }
+    
+### Editar por id:
+    
+    mutation editar{
+    updateUser(id:"63e29267d39499c37d9496e2", user:{
+    nome: "ikaro silva",
+    email:"ikaro@gmail.com",
+    senha:"123654987"
+    }){
+      id
+      nome
+      email
+      senha
+    }
+  }
+  
+### Deletar por Id:
+   
+     mutation deleteID{
+       deleteUser(id:"63e29267d39499c37d9496e2") {
+        id
+        nome
+        email
+        senha
+      }
+    }
+  
+## Todos os testes foram executado na ferramenta que o apollo-server ddisponibilizar:
+  ### https://studio.apollographql.com/sandbox/explorer
+  
+
 
 
     
