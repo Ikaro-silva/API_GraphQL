@@ -89,7 +89,7 @@ Caminho:<b>API_GraphQL/src/server.js</b>
       })
      
 
-Na conecção do servidor temos chamas para os arquivos resolvers e typeDefs,vamos crialos?
+Na conexão do servidor temos chamas para os arquivos resolvers e typeDefs,vamos cria-los?
 
 ## Criando definições de tipo (typeDefs)
 O typeDefs é uma junção de 3 itens:
@@ -135,7 +135,7 @@ Caminho: <b>API_GraphQL/src/typeDefs/types.js</b>
     module.exports=types
 
 ## Query
-Agora vamos montar a query.vamos montar 2 queries : uma que retorna um array de usuários e o outro vai retornar somente um usuario 
+Agora vamos montar a query.vamos montar 2 queries : uma que retorna um array de usuários e o outro vai retornar somente um usuário 
 apartir de um id informado.
 
 Em <b>typeDefs/types.js</b> escreva o seguinte código:
