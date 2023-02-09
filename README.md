@@ -2,7 +2,7 @@
 
 # Como montar Uma API com GraphQl em Node.js com Apollo Server e MongoDB
   ## Sobre o tutorial
-      A proposta é fazer um API que possa gerencia Usuários fazendo operações CRUD com os dados.
+      A proposta é fazer um API que possa gerenciar Usuários fazendo operações CRUD com os dados.
       no servidor usaremos Node.js.Vamos começar a desenvolver a nossa API em GraphQl?
   
   
@@ -35,7 +35,8 @@
   ### npm
       npm init -y
       
-  Abra o terminar no logal da pasta do projeto API_GraphQ execute o comando acima
+  Abra o terminar no local
+ da pasta do projeto API_GraphQ execute o comando acima
 
 ## Instalando dependencias
    ### Apollo-Server,GraphQL, mongoose, dotenv
@@ -44,7 +45,7 @@
    Na pasta do projeto API_GraphQ execute o comando acima.
    - graphql: Montar schemas e executar queries GraphQL
    - apollo-server: Montar servidor GraphQL(tem ferramenta de suporte para teste da api)
-   - mongoose: Montar o model para o banco de dados e estabelecer conecção com o MongoDB
+   - mongoose: Montar o model para o banco de dados e estabelecer conexão com o MongoDB
    - dotenv: Montar variáveis de ambiente 
    
 ## GraphQL/Apollo-Server/MongoDB
@@ -55,7 +56,7 @@
        - Resolvers: Definir como sera feita cada ação dentro do banco de dados
        - Model: Definir campos usados no banco de dados 
  
-## Configurando servidor/conecção com banco de dados
+## Configurando servidor/conexão com banco de dados
 
 Na pasta API_GraphQL, crie uma pasta <b>src </b>
 
@@ -76,7 +77,7 @@ Caminho:<b>API_GraphQL/src/server.js</b>
             console.log('Banco de dados conectado')
         })
         .catch(err=>{
-            console.log('Fala ao conectar ao banco de dados',err)
+            console.log('Falha ao conectar ao banco de dados',err)
         })
 
     //SERVIDOR
@@ -85,11 +86,11 @@ Caminho:<b>API_GraphQL/src/server.js</b>
       .then(({url})=>{
           console.log('servidor conectado na url',url)
       }).catch(err=>{
-          console.log('falga ao conectar o servidor',err)
+          console.log('falha ao se conectar ao servidor',err)
       })
      
 
-Na conexão do servidor temos chamas para os arquivos resolvers e typeDefs,vamos cria-los?
+Na conexão do servidor temos chamadas para os arquivos resolvers e typeDefs,vamos cria-los?
 
 ## Criando definições de tipo (typeDefs)
 O typeDefs é uma junção de 3 itens:
@@ -151,10 +152,10 @@ Caminho: <b>API_GraphQL/src/typeDefs/query.js</b>
     `;
     module.exports=query
     
-Pronto as queries estão definidas. No trecho de código acima dissemos ao servidor que a query chamada useres deve retornar um array com dados do tipo User (definido no passo anterior) e a query chamada fruit deve ter um parâmetro chamado id com um dado do tipo ID (já existente em GraphQL) e retornar um item do tipo User. A exclamação (!) define o campo como obrigatório
+Pronto as queries estão definidas. No trecho de código acima dissemos ao servidor que a query chamada useres deve retornar um array com dados do tipo User (definido no passo anterior) e a query chamada user deve ter um parâmetro chamado id com um dado do tipo ID (já existente em GraphQL) e retornar um item do tipo User. A exclamação (!) define o campo como obrigatório
 
 ## Mutation
-Agora vamos definir a mutation, essa parte é parecida com as queries.Mutations são queries responsaveis por alteração de dados.
+Agora vamos definir a mutation, essa parte é parecida com as queries.Mutations são queries responsáveis por alteração de dados.
 
 Em <b>typeDefs/types.js</b> escreva o seguinte código:
 
@@ -187,7 +188,7 @@ Caminho: <b>API_GraphQL/src/typeDefs/mutation.js</b>
 
     module.exports=mutation
 
-Alem do tipo Mutation estão definidos alguns tipos input, esses inputs são para separar os parâmetros passados a mutation a fim de deixar as assinaturas mais limpas e de fácil manutenção.
+Além do tipo Mutation estão definidos alguns tipos input, esses inputs são para separar os parâmetros passados a mutation a fim de deixar as assinaturas mais limpas e de fácil manutenção.
 
 ## Conclusão de typeDefs
   Para concluir essa parte. Em <b>typeDefs/types.js</b> escreva o seguinte código:
@@ -229,7 +230,7 @@ Caminho: <b>API_GraphQL/src/model/-user.model.js</b>
         module.exports=User
     
 ## Criando Resolvers
-Resolvers é aonde associamos quais ações queries e mutations devem tomar e la tambem é aonde é definido as chamadas feitas no banco de dados.Então usamos o model apara implementar essas ações no banco de dados.
+Resolvers é onde associamos quais ações queries e mutations devem tomar e la também é onde é definido as chamadas feitas no banco de dados. Então usaremos o model para implementar essas ações no banco de dados.
 
 Em <b>resolvers/userResolver.js</b> escreva o seguinte código:
 
@@ -303,7 +304,7 @@ Caminho: <b>API_GraphQL/src/config/DBconfig.js</b>
     }
 
 
-# Pronto,Nossa API-GraphQL esta pronta!
+# Pronto,nossa API-GraphQL esta pronta!
 
 ## Testando a API
 
